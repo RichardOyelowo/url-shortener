@@ -12,7 +12,7 @@ class User(Base):
     username: Mapped[str] = mapped_column("name", String(50))
     email: Mapped[str] = mapped_column("email",String, unique=True)
     hashed_password: Mapped[str] = mapped_column("hashed_password", String)
-    is_active: Mapped[bool] = mapped_column("is_active", default=True)
+    is_active: Mapped[bool] = mapped_column("is_active", default=True, nullable=False)
     created_at: Mapped[datetime] = mapped_column("created_at", default=lambda: datetime.now(timezone.utc))
     links: Mapped[list["Link"]] = relationship(back_populates="user")
 
@@ -27,7 +27,7 @@ class Link(Base):
     user_id: Mapped[int] = mapped_column("user_id", Integer, ForeignKey("user.id"))
     original_url: Mapped[str] = mapped_column("original_url")
     short_code: Mapped[str] = mapped_column("short_code", unique=True)
-    click_count: Mapped[int] = mapped_column("click_count")
+    click_count: Mapped[int] = mapped_column("click_count",Integer, default=0, nullable=False)
     created_at: Mapped[datetime] = mapped_column("created_at", default=lambda: datetime.now(timezone.utc))
     user: Mapped["User"] = relationship(back_populates="links")
 
