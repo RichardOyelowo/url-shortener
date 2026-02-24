@@ -1,15 +1,15 @@
-from fastapi import FastAPI
 from app.schemas import LinkCreate, LinkResponse
+from fastapi import APIRouter
 
-app = FastAPI()
+router = APIRouter()
 
 
-@app.get("/shortcode")
-async def load_link(url: LinkResponse.short_code):
+@router.get("/{shortcode}")
+async def load_link(shortcode: str):
     pass
 
 
-@app.post("/links")
-async def create_link(url: LinkCreate.original_url):
+@router.post("/links")
+async def create_link(link: LinkCreate):
     pass
 
