@@ -1,0 +1,15 @@
+from pydantic import BaseModel, ConfigDict
+from datetime import datetime
+
+
+class LinkCreate(BaseModel):
+    original_url: str
+
+class LinkResponse(BaseModel):
+    id: int
+    user_id: int
+    original_url: str
+    short_code: str
+    click_count: int
+    created_at: datetime
+    model_config = ConfigDict(from_attributes=True)
