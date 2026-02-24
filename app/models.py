@@ -23,7 +23,6 @@ class Link(Base):
     __tablename__ = "link"
 
     id: Mapped[int] = mapped_column("id", Integer, primary_key=True)
-    user_id: Mapped[int] = mapped_column("user_id", Integer, ForeignKey("user.id"))
     original_url: Mapped[str] = mapped_column("original_url")
     short_code: Mapped[str] = mapped_column("short_code", unique=True)
     click_count: Mapped[int] = mapped_column("click_count",Integer, default=0, nullable=False)
