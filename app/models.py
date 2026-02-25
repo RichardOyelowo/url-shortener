@@ -8,8 +8,8 @@ class Link(Base):
     __tablename__ = "link"
 
     id: Mapped[int] = mapped_column("id", Integer, primary_key=True)
-    original_url: Mapped[str] = mapped_column("original_url")
-    short_code: Mapped[str] = mapped_column("short_code", unique=True)
+    original_url: Mapped[str] = mapped_column("original_url", String)
+    short_code: Mapped[str] = mapped_column("short_code", String, unique=True)
     click_count: Mapped[int] = mapped_column("click_count",Integer, default=0, nullable=False)
     created_at: Mapped[datetime] = mapped_column("created_at", default=lambda: datetime.now(timezone.utc))
     
