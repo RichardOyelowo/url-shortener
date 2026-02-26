@@ -10,7 +10,7 @@ from fastapi.responses import RedirectResponse
 
 router = APIRouter()
 
-@router.get("/links/{shortcode}")
+@router.get("/{shortcode}")
 async def load_link(shortcode: str, db: SessionDep):
     results = await db.execute(select(Link).where(Link.short_code == shortcode))
     link = results.scalars().first()
