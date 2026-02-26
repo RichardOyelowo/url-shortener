@@ -1,4 +1,3 @@
-from os import wait
 from app.models import Link, Click
 from sqlalchemy import select
 from app.schemas import LinkCreate
