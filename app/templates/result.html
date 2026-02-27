@@ -1,5 +1,63 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    <div class="result-page">
+        <div class="checkmark">✓</div>
+        <h1 class="result-heading">Link <span style="color:#e6be64">snipped.</span></h1>
+        <p class="result-sub">Your short URL is ready to share</p>
+
+        <div class="link-box">
+            <span class="link-icon">⌁</span>
+            <span class="link-text" id="short-url">{{ link }}</span>
+            <button class="copy-btn" id="copy-btn">Copy</button>
+        </div>
+
+        <div class="result-actions">
+            <a href="/" class="btn-ghost">← Shorten another</a>
+        </div>
+
+        <script>
+            document.getElementById('copy-btn').addEventListener('click', function () {
+                const btn = this;
+                const text = document.getElementById('short-url').textContent.trim();
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text)
+                        .then(() => showCopied(btn))
+                        .catch(() => fallbackCopy(text, btn));
+                } else {
+                    fallbackCopy(text, btn);
+                }
+            });
+
+            function fallbackCopy(text, btn) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+
+                try {
+                    document.execCommand('copy');
+                    showCopied(btn);
+                } catch (err) {
+                    console.error('Copy failed', err);
+                }
+
+                document.body.removeChild(textarea);
+            }
+
+            function showCopied(btn) {
+                btn.textContent = '✓ Copied';
+                btn.classList.add('copied');
+
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        </script>
+    </div>
 {% endblock %}
 
