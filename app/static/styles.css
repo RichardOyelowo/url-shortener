@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0a0a0a;
+    color: #f0ede6;
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.body-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background grid */
+.bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-glow {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(230, 190, 100, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Nav */
+nav {
+    position: relative;
+    z-index: 10;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    color: #e6be64;
+}
+
+.nav-tag {
+    font-size: 0.7rem;
+    color: rgba(240, 237, 230, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #e6be64;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+}
+
+h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+}
+
+h1 span {
+    color: #e6be64;
+    position: relative;
+    display: inline-block;
+}
+
+h1 span::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #e6be64;
+    opacity: 0.4;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: rgba(240, 237, 230, 0.4);
+    max-width: 380px;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.3s;
+}
+
+/* Form */
+.form-wrap {
+    width: 100%;
+    max-width: 580px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+}
+
+.input-row {
+    display: flex;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.input-row:focus-within {
+    border-color: #e6be64;
+}
+
+.input-row input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 1.1rem 1.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: #f0ede6;
+    min-width: 0;
+}
+
+.input-row input::placeholder {
+    color: rgba(240, 237, 230, 0.2);
+}
+
+.input-row button {
+    background: #e6be64;
+    color: #0a0a0a;
+    border: none;
+    padding: 1.1rem 1.8rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.input-row button:hover {
+    background: #f0ce74;
+}
+
+.input-row button:active {
+    transform: scale(0.98);
+}
+
+.form-hint {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: rgba(240, 237, 230, 0.2);
+    letter-spacing: 0.05em;
+}
+
+/* Stats row */
+.stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.5s;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: #e6be64;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(240, 237, 230, 0.25);
+    margin-top: 0.4rem;
+}
+
+/* Steps */
+.steps {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+}
+
+.step {
+    flex: 1;
+    max-width: 240px;
+    padding: 2.5rem 2rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: center;
+}
+
+.step:last-child {
+    border-right: none;
+}
+
+.step-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: rgba(230, 190, 100, 0.15);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+}
+
+.step-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.step-desc {
+    font-size: 0.72rem;
+    color: rgba(240, 237, 230, 0.3);
+    line-height: 1.7;
+}
+
+/* footer */
+footer {
+    position: relative;
+    z-index: 10;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+footer p {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: rgba(240,237,230,0.2);
+    text-transform: uppercase;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        padding: 1.5rem;
+    }
+
+    .stats {
+        gap: 2rem;
+    }
+
+    .steps {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .step {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        max-width: 100%;
+    }
+
+    .step:last-child {
+        border-bottom: none;
+    }
+
+    .input-row {
+        flex-direction: column;
+    }
+
+    .input-row button {
+        padding: 1rem;
+    }
+}
