@@ -1,16 +1,19 @@
-from app.models import Link, Click
+from typing import Annotated
 from sqlalchemy import select
+from app.models import Link, Click
 from app.schemas import LinkCreate
-from app.database import SessionDep 
+from app.database import SessionDep
+from app.templates_config import templates
 from app.utils import convert_to_shortcode
-from fastapi import APIRouter, HTTPException
 from fastapi.responses import RedirectResponse
+from fastapi import APIRouter, HTTPException, Form, Request
+
 
 
 router = APIRouter()
 
 @router.get("/{shortcode}")
-async def load_link(shortcode: str, db: SessionDep):
+async def load_link(shortcode:str, db: SessionDep):
     results = await db.execute(select(Link).where(Link.short_code == shortcode))
     link = results.scalars().first()
     
@@ -30,12 +33,12 @@ async def load_link(shortcode: str, db: SessionDep):
 
 
 @router.post("/links/")
-async def create_link(link: LinkCreate, db: SessionDep):
+async def create_link(request: Request, link: Annotated[LinkCreate, Form()], db: SessionDep):
     results = await db.execute(select(Link).where(Link.original_url == link.original_url))
     existing = results.scalars().first()
 
     if existing:
-        return existing
+        return templates.TemplateResponse(request=request, name="result.html", context={"link":existing})
 
     new_link = Link(original_url=link.original_url)
     db.add(new_link)
@@ -46,4 +49,4 @@ async def create_link(link: LinkCreate, db: SessionDep):
     await db.commit()
     await db.refresh(new_link)
 
-    return new_link
+    return templates.TemplateResponse(request=request, name="result.html", context={"link":new_link})
