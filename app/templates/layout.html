@@ -1,8 +1,33 @@
 <!DOCTYPE html>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width:device-width initial-scale=1.0">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Snip — URL Shortener{% endblock %}</title>
+        <link rel="stylesheet" href="/static/styles.css">
+    </head>
 
-    <title>URL SHORTENER</title>
+    <body>
+        <div class="body-container">
+            <div class="bg-grid"></div>
+            <div class="bg-glow"></div>
 
-    <div class="body-container">{% block body %}{% endblock %}</div>
+            <nav>
+                <div class="logo">snip.</div>
+                <div class="nav-tag">URL Shortener</div>
+            </nav>
+
+            {% block body %}{% endblock %}
+
+            <footer>
+                <p>Built with love for development by Richard Oyelowo</p>
+            </footer>
+        </div>
+    </body>
+    
+    <footer class="mt-auto py-3 text-center">
+        <div class="container">
+            <p class="text-muted mb-0">Built with love for development by Richard Oyelowo</p>
+        </div>
+    </footer>
 </html>
