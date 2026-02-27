@@ -13,7 +13,7 @@ from fastapi import APIRouter, HTTPException, Form, Request
 router = APIRouter()
 
 @router.get("/{shortcode}")
-async def load_link(shortcode:str, db: SessionDep):
+async def load_link(request: Request, shortcode:str, db: SessionDep):
     results = await db.execute(select(Link).where(Link.short_code == shortcode))
     link = results.scalars().first()
     
@@ -29,7 +29,7 @@ async def load_link(shortcode:str, db: SessionDep):
 
         return RedirectResponse(url=link.original_url, status_code=302)
 
-    raise HTTPException(status_code=404, detail="Link not Found")
+    return templates.TemplateResponse(request=request, name="link_not_found.html")
 
 
 @router.post("/links/")
@@ -38,7 +38,8 @@ async def create_link(request: Request, link: Annotated[LinkCreate, Form()], db:
     existing = results.scalars().first()
 
     if existing:
-        return templates.TemplateResponse(request=request, name="result.html", context={"link":existing})
+        short_link = f"{request.base_url}{existing.short_code}"
+        return templates.TemplateResponse(request=request, name="result.html", context={"link":short_link})
 
     new_link = Link(original_url=link.original_url)
     db.add(new_link)
@@ -48,5 +49,7 @@ async def create_link(request: Request, link: Annotated[LinkCreate, Form()], db:
     new_link.short_code = convert_to_shortcode(new_link.id)
     await db.commit()
     await db.refresh(new_link)
+
+    short_link = f"{request.base_url}{new_link.short_code}"
 
     return templates.TemplateResponse(request=request, name="result.html", context={"link":new_link})
