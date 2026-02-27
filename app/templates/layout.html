@@ -3,8 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon/favicon-96x96.png">
+        <link rel="shortcut icon" href="/static/favicon/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+        <link rel="manifest" href="/static/favicon/site.webmanifest"> 
+
+        <meta name="apple-mobile-web-app-title" content="Snip">
+        <link rel="stylesheet" href="/static/styles.css">        
         <title>{% block title %}Snip — URL Shortener{% endblock %}</title>
-        <link rel="stylesheet" href="/static/styles.css">
     </head>
 
     <body>
@@ -13,7 +22,7 @@
             <div class="bg-glow"></div>
 
             <nav>
-                <div class="logo">snip.</div>
+                <div class="logo"><img src="/static/logo-nobg.svg" height="40" alt="snip."></div>
                 <div class="nav-tag">URL Shortener</div>
             </nav>
 
