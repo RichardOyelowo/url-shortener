@@ -52,4 +52,4 @@ async def create_link(request: Request, link: Annotated[LinkCreate, Form()], db:
 
     short_link = f"{request.base_url}{new_link.short_code}"
 
-    return templates.TemplateResponse(request=request, name="result.html", context={"link":new_link})
+    return templates.TemplateResponse(request=request, name="result.html", context={"link":short_link})
