@@ -8,3 +8,5 @@ venv/
 .git/
 *.pyc
 *.pyo
+.idea
+*/.idea/
