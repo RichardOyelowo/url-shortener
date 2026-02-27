@@ -1,0 +1,15 @@
+FROM python:3.14
+
+WORKDIR /code
+
+COPY ./requirements.txt /code/requirements.txt
+
+RUN pip install -r /code/requirements.txt
+
+COPY ./app /code/app/
+
+COPY ./migrations /code/migrations/
+
+COPY ./alembic.ini /code/alembic.ini
+
+CMD ["fastapi", "run", "app/main.py", "--port", "80"]
