@@ -1,4 +1,63 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    <div>
+        <div class="bg-grid"></div>
+            <div class="bg-glow"></div>
+
+            <nav>
+                <div class="logo">snip.</div>
+                <div class="nav-tag">URL Shortener</div>
+            </nav>
+
+            <main class="hero">
+                <div class="eyebrow">// free & instant</div>
+                <h1>Long URLs,<br><span>Snipped</span>.</h1>
+                <p class="subtitle">Paste any URL and get a clean, shareable short link in seconds. No account needed.</p>
+
+                <div class="form-wrap">
+                    <form action="/links/" method="post">
+                        <div class="input-row">
+                            <input type="url" name="original_url" autofocus required
+                             placeholder="https://your-very-long-url.com/goes/here"/>
+                            <button type="submit">Snip it →</button>
+                        </div>
+                    </form>
+                    <p class="form-hint">Free to use · No sign-up · Links never expire</p>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-num">∞</div>
+                        <div class="stat-label">Links</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">0s</div>
+                        <div class="stat-label">Sign-up time</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num">100%</div>
+                        <div class="stat-label">Free</div>
+                    </div>
+                </div>
+            </main>
+
+            <div class="steps">
+            <div class="step">
+                <div class="step-num">01</div>
+                <div class="step-title">Paste</div>
+                <div class="step-desc">Drop your long URL into the box above</div>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <div class="step-title">Snip</div>
+                <div class="step-desc">Get a clean short link instantly</div>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <div class="step-title">Share</div>
+                <div class="step-desc">Copy and share anywhere you want</div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
