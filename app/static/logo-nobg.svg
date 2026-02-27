@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;display=swap');
+      
+      .logo-text {
+        animation: fadeSlideIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        opacity: 0;
+      }
+      
+      .dot {
+        animation: fadeSlideIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+        opacity: 0;
+      }
+      
+      .underline-bar {
+        animation: slideIn 0.6s ease forwards 0.5s;
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: left center;
+      }
+      
+      .scissors-left {
+        animation: snipLeft 2s ease-in-out 1.2s infinite;
+        transform-box: fill-box;
+        transform-origin: center center;
+      }
+      
+      .scissors-right {
+        animation: snipRight 2s ease-in-out 1.2s infinite;
+        transform-box: fill-box;
+        transform-origin: center center;
+      }
+
+      .dash-line {
+        animation: dashMove 1.5s linear infinite;
+      }
+      
+      @keyframes fadeSlideIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes slideIn {
+        from { opacity: 0; transform: scaleX(0); }
+        to { opacity: 0.4; transform: scaleX(1); }
+      }
+      
+      @keyframes snipLeft {
+        0%, 100% { transform: rotate(0deg); }
+        30% { transform: rotate(-14deg); }
+        60% { transform: rotate(0deg); }
+      }
+      
+      @keyframes snipRight {
+        0%, 100% { transform: rotate(0deg); }
+        30% { transform: rotate(14deg); }
+        60% { transform: rotate(0deg); }
+      }
+
+      @keyframes dashMove {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: -12; }
+      }
+    </style>
+  </defs>
+  
+  <!-- Logo text -->
+  <text 
+    class="logo-text"
+    x="0" 
+    y="46" 
+    font-family="Syne, Georgia, serif" 
+    font-weight="800" 
+    font-size="52" 
+    letter-spacing="-2"
+    fill="#f0ede6"
+  >snip</text>
+  
+  <!-- Gold dot -->
+  <text 
+    class="dot"
+    x="120" 
+    y="46" 
+    font-family="Syne, Georgia, serif" 
+    font-weight="800" 
+    font-size="52"
+    fill="#e6be64"
+  >.</text>
+  
+  <!-- Underline -->
+  <rect 
+    class="underline-bar" 
+    x="0" y="52" 
+    width="140" height="2.5" 
+    fill="#e6be64" 
+    rx="1"
+  />
+
+  <!-- Scissors (top right of dot) -->
+  <g transform="translate(148, 0)">
+    <g class="scissors-left">
+      <circle cx="7" cy="7" r="4.5" fill="none" stroke="#e6be64" stroke-width="1.5"/>
+      <line x1="10.5" y1="10.5" x2="24" y2="24" stroke="#e6be64" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <g class="scissors-right">
+      <circle cx="7" cy="19" r="4.5" fill="none" stroke="#e6be64" stroke-width="1.5"/>
+      <line x1="10.5" y1="15.5" x2="24" y2="24" stroke="#e6be64" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <!-- Dashed cut line -->
+    <line 
+      class="dash-line"
+      x1="24" y1="13" x2="44" y2="13" 
+      stroke="#e6be64" stroke-width="1" 
+      stroke-dasharray="4,4" 
+      stroke-opacity="0.5"
+      stroke-linecap="round"
+    />
+  </g>
+</svg>
