@@ -6,3 +6,4 @@
 .git/
 *.pyc
 *.pyo
+*.idea
