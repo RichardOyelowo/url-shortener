@@ -278,6 +278,137 @@ h1 span::after {
     line-height: 1.7;
 }
 
+/* Result Page */
+.result-page {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+.checkmark {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(230, 190, 100, 0.1);
+    border: 1px solid rgba(230, 190, 100, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.result-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    animation: fadeUp 0.4s ease forwards 0.1s;
+    opacity: 0;
+}
+
+.result-sub {
+    font-size: 0.8rem;
+    color: rgba(240,237,230,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.4s ease forwards 0.2s;
+    opacity: 0;
+}
+
+.link-box {
+    width: 100%;
+    max-width: 560px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(230,190,100,0.3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease forwards 0.3s;
+    opacity: 0;
+}
+
+.link-icon {
+    padding: 0 1rem;
+    color: #e6be64;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.link-text {
+    flex: 1;
+    padding: 1.1rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    color: #e6be64;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.copy-btn {
+    background: #e6be64;
+    color: #0a0a0a;
+    border: none;
+    padding: 1.1rem 1.4rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.copy-btn:hover { background: #f0ce74; }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied {
+    background: #4ade80;
+    color: #0a0a0a;
+}
+
+.result-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    animation: fadeUp 0.4s ease forwards 0.4s;
+    opacity: 0;
+}
+
+.btn-ghost {
+    padding: 0.75rem 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: rgba(240,237,230,0.5);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+    border-color: rgba(255,255,255,0.25);
+    color: rgba(240,237,230,0.8);
+}
+
+
 /* footer */
 footer {
     position: relative;
@@ -292,6 +423,11 @@ footer p {
     letter-spacing: 0.1em;
     color: rgba(240,237,230,0.2);
     text-transform: uppercase;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 @keyframes fadeUp {
