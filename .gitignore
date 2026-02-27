@@ -3,3 +3,6 @@
 .env*
 *__pycache*
 *pycache*
+.git/
+*.pyc
+*.pyo
