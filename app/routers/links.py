@@ -28,7 +28,7 @@ async def load_link(request: Request, shortcode:str, db: SessionDep):
 
         try:
             await db.commit()
-        except:
+        except Exception:
             await db.rollback()
 
         await db.refresh(link)
