@@ -8,11 +8,9 @@ from fastapi.staticfiles import StaticFiles
 from app.routers import router, admin_router
 from fastapi import FastAPI, Depends, Request
 from sqladmin.authentication import AuthenticationBackend
-from starlette.middleware.sessions import SessionMiddleware
 
 
 app = FastAPI()
-app.add_middleware(SessionMiddleware, secret_key="testsecret123", https_only=False, same_site="lax")
 app.mount("/assets", StaticFiles(directory="app/static"), name="static")
 
 
@@ -42,11 +40,11 @@ class AdminAuth(AuthenticationBackend):
 authentication_backend = AdminAuth(secret_key="testsecret123")
 admin = Admin(app, engine, authentication_backend=authentication_backend)
 
-
 admin.add_view(LinkAdmin)
 admin.add_view(ClickAdmin)
 
 
+# Routes
 app.include_router(admin_router, dependencies=[Depends(verify_header)])
 app.include_router(router)
 
