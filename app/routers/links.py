@@ -9,11 +9,14 @@ from fastapi.responses import RedirectResponse
 from fastapi import APIRouter, HTTPException, Form, Request
 
 
-
 router = APIRouter()
 
 @router.get("/{shortcode}")
 async def load_link(request: Request, shortcode:str, db: SessionDep):
+    if shortcode == "admin":
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/admin/")
+        
     results = await db.execute(select(Link).where(Link.short_code == shortcode))
     link = results.scalars().first()
     
