@@ -21,12 +21,16 @@ async def load_link(request: Request, shortcode:str, db: SessionDep):
     
     if link:
         # create click object
-        clicked = Click(link_id=link.id)
-        db.add(clicked)
+        db.add(Click(link_id=link.id))
         
         # increment click count
-        link.click_count += 1
-        await db.commit()
+        await db.execute(update(Link).where(Link.id == link.id).values(click_count=Link.click_count + 1))
+
+        try:
+            await db.commit()
+        except:
+            await db.rollback()
+
         await db.refresh(link)
 
         return RedirectResponse(url=link.original_url, status_code=302)
@@ -36,6 +40,9 @@ async def load_link(request: Request, shortcode:str, db: SessionDep):
 
 @router.post("/links/")
 async def create_link(request: Request, link: Annotated[LinkCreate, Form()], db: SessionDep):
+    if not link.original_url.startswith(("http://", "https://")):
+        link.original_url = "https://" + link.original_url
+
     results = await db.execute(select(Link).where(Link.original_url == link.original_url))
     existing = results.scalars().first()
 

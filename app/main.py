@@ -8,9 +8,12 @@ from fastapi.staticfiles import StaticFiles
 from app.routers import router, admin_router
 from fastapi import FastAPI, Depends, Request
 from sqladmin.authentication import AuthenticationBackend
+from starlette.middleware.sessions import SessionMiddleware
 
 
 app = FastAPI()
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("SESSION_SECRET"))
+
 app.mount("/assets", StaticFiles(directory="app/static"), name="static")
 
 
@@ -21,23 +24,30 @@ class LinkAdmin(ModelView, model=Link):
 class ClickAdmin(ModelView, model=Click):
     column_list = [Click.id, Click.link_id, Click.created_at]
 
-
 class AdminAuth(AuthenticationBackend):
     async def login(self, request: Request) -> bool:
         form = await request.form()
-        if form["username"] == "admin" and form["password"] == os.getenv("ADMIN_PASSWORD"):
+        username = form.get("username")
+        password = form.get("password")
+
+        admin_password = os.getenv("ADMIN_PASSWORD")
+
+        if username == "admin" and admin_password and password == admin_password:
             request.session["token"] = "authenticated"
             return True
         return False
+
 
     async def logout(self, request: Request) -> bool:
         request.session.clear()
         return True
 
+
     async def authenticate(self, request: Request) -> bool:
         return request.session.get("token") == "authenticated"
 
-authentication_backend = AdminAuth(secret_key="testsecret123")
+
+authentication_backend = AdminAuth(secret_key=os.getenv("SECRET_KEY"))
 admin = Admin(app, engine, authentication_backend=authentication_backend)
 
 admin.add_view(LinkAdmin)

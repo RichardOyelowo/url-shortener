@@ -1,9 +1,9 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, HttpUrl
 from datetime import datetime
 
 
 class LinkCreate(BaseModel):
-    original_url: str
+    original_url: HttpUrl
 
 class LinkResponse(BaseModel):
     id: int
