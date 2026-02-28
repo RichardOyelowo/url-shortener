@@ -10,7 +10,7 @@ from fastapi import FastAPI, Depends, Request
 from sqladmin.authentication import AuthenticationBackend
 
 app = FastAPI()
-app.mount("/assets", StaticFiles(directory="app/assets"), name="static")
+app.mount("/assets", StaticFiles(directory="app/static"), name="static")
 
 
 # Admin Dashboard
