@@ -9,7 +9,7 @@ from app.routers import router, admin_router
 from fastapi import FastAPI, Depends, Request
 from sqladmin.authentication import AuthenticationBackend
 from starlette.middleware.sessions import SessionMiddleware
-from starlette.middleware.proxy_headers import ProxyHeadersMiddleware
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 
 app = FastAPI()
