@@ -16,7 +16,6 @@ app.mount("/assets", StaticFiles(directory="app/static"), name="static")
 
 
 # Admin Dashboard
-app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY"))
 class LinkAdmin(ModelView, model=Link):
     column_list = [Link.id, Link.original_url, Link.short_code, Link.click_count, Link.created_at]
 
@@ -39,8 +38,9 @@ class AdminAuth(AuthenticationBackend):
     async def authenticate(self, request: Request) -> bool:
         return request.session.get("token") == "authenticated"
 
-authentication_backend = AdminAuth(secret_key=os.getenv("SECRET_KEY"))
+authentication_backend = AdminAuth(secret_key="testsecret123")
 admin = Admin(app, engine, authentication_backend=authentication_backend)
+app.add_middleware(SessionMiddleware, secret_key="testsecret123")
 
 
 admin.add_view(LinkAdmin)
