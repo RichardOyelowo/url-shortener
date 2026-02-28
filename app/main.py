@@ -8,12 +8,15 @@ from fastapi.staticfiles import StaticFiles
 from app.routers import router, admin_router
 from fastapi import FastAPI, Depends, Request
 from sqladmin.authentication import AuthenticationBackend
+from starlette.middleware.sessions import SessionMiddleware
+
 
 app = FastAPI()
 app.mount("/assets", StaticFiles(directory="app/static"), name="static")
 
 
 # Admin Dashboard
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY"))
 class LinkAdmin(ModelView, model=Link):
     column_list = [Link.id, Link.original_url, Link.short_code, Link.click_count, Link.created_at]
 
