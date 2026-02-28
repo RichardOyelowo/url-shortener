@@ -12,6 +12,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 
 app = FastAPI()
+app.add_middleware(SessionMiddleware, secret_key="testsecret123", https_only=False, same_site="lax")
 app.mount("/assets", StaticFiles(directory="app/static"), name="static")
 
 
@@ -40,7 +41,6 @@ class AdminAuth(AuthenticationBackend):
 
 authentication_backend = AdminAuth(secret_key="testsecret123")
 admin = Admin(app, engine, authentication_backend=authentication_backend)
-app.add_middleware(SessionMiddleware, secret_key="testsecret123")
 
 
 admin.add_view(LinkAdmin)
