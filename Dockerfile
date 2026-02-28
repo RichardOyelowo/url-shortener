@@ -12,4 +12,6 @@ COPY ./migrations /code/migrations/
 
 COPY ./alembic.ini /code/alembic.ini
 
+COPY ./start.sh /code/start.sh
+
 CMD ["bash", "start.sh"]
