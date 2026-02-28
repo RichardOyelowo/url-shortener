@@ -12,4 +12,4 @@ COPY ./migrations /code/migrations/
 
 COPY ./alembic.ini /code/alembic.ini
 
-CMD ["fastapi", "run", "app/main.py", "--port", "80"]
+CMD ["bash", "start.sh"]
