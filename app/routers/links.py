@@ -13,7 +13,7 @@ router = APIRouter()
 
 @router.get("/{shortcode}")
 async def load_link(request: Request, shortcode:str, db: SessionDep):
-    if shortcode == "admin":
+    if shortcode in ("admin", "statics"):
         return RedirectResponse(url=f"/{shortcode}/")
         
     results = await db.execute(select(Link).where(Link.short_code == shortcode))
