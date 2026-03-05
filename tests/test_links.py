@@ -14,7 +14,7 @@ async def test_load_link_success(client):
     short_code = response.text.split("http://test/")[1].split("<")[0]
     info = await client.get(f"/{short_code}", follow_redirects=False)
     assert info.status_code == 302
-    assert info.headers["location"] == "https://devbrain.online"
+    assert info.headers["location"] == "https://devbrain.online/"
 
 
 @pytest.mark.asyncio
