@@ -2,7 +2,7 @@
 
 # <img src="images/logo.svg" width="500">
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+[![CI](https://github.com/RichardOyelowo/Snip/actions/workflows/ci.yml/badge.svg)](https://github.com/RichardOyelowo/Snip/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.14-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.129-green.svg)](https://fastapi.tiangolo.com/)
 [![Status](https://img.shields.io/badge/Status-Active-success.svg)]()
