@@ -5,7 +5,7 @@ from sqlalchemy import select, delete
 from app.utils import decode_shortcode
 from app.schemas import LinkCreate, LinkResponse
 
-admin_router = APIRouter(prefix="/admin")
+admin_router = APIRouter(prefix="/api/admin")
 
 
 @admin_router.get("/links")
