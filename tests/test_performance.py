@@ -6,7 +6,7 @@ import pytest
 
 @pytest.mark.asyncio
 async def test_redirect_performance(client):
-    # create a link first
+    
     response = await client.post(
         "/links/",
         data={"original_url": "https://example.com"}
@@ -22,7 +22,7 @@ async def test_redirect_performance(client):
         latency = time.perf_counter() - start
         return res.status_code, latency
 
-    # concurrency level (you can increase later: 50 → 100 → 500)
+    
     tasks = [hit() for _ in range(100)]
     results = await asyncio.gather(*tasks)
 
