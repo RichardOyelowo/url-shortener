@@ -7,7 +7,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.129-green.svg)](https://fastapi.tiangolo.com/)
 [![Status](https://img.shields.io/badge/Status-Active-success.svg)]()
 
-A fast, minimal URL shortener built with FastAPI and PostgreSQL. Paste any long URL and get a clean, shareable short link instantly — no account required.
+A fast, minimal URL shortener built with FastAPI and PostgreSQL. Paste any long URL and get a clean, shareable short link instantly. No account required.
 
 [![](https://img.shields.io/badge/Snip-snip--ly.xyz-e6be64?style=for-the-badge&logo=googlechrome&logoColor=white)](https://snip-ly.xyz)
 
@@ -22,6 +22,8 @@ A fast, minimal URL shortener built with FastAPI and PostgreSQL. Paste any long 
 ## Table of Contents
 
 - [Description](#description)
+- [Why This Project Matters](#why-this-project-matters)
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Quick Start](#quick-start)
@@ -49,9 +51,27 @@ A fast, minimal URL shortener built with FastAPI and PostgreSQL. Paste any long 
 
 Snip was built to practice async FastAPI, Docker deployment, and production database management. It handles URL shortening with Base62 encoding, tracks clicks per link, and includes a protected admin dashboard for managing all links and analytics.
 
-The project deliberately avoids user accounts — the goal was to build a clean, stateless public tool and focus on the backend architecture: async database operations, containerization, and deployment pipeline rather than auth complexity.
+The project deliberately avoids user accounts. The goal was to build a clean, stateless public tool and focus on the backend architecture: async database operations, containerization, and deployment pipeline rather than auth complexity.
 
-No bloat — just paste, shorten, share.
+No bloat. Just paste, shorten, share.
+
+## Why This Project Matters
+
+Snip is a small product with real backend concerns:
+
+- Public write path with duplicate detection
+- Redirect path that must stay fast
+- Click tracking without blocking redirects
+- Admin-only analytics and deletion
+- Migration-backed database changes
+- Integration tests around the main user flows
+
+That makes it a useful example of a production-shaped FastAPI app without the extra complexity of accounts, billing, or background workers.
+
+## Live Demo
+
+- App: [snip-ly.xyz](https://snip-ly.xyz)
+- Repository: [github.com/RichardOyelowo/Snip](https://github.com/RichardOyelowo/Snip)
 
 ---
 
